@@ -65,14 +65,15 @@ for optiune in optiuni_formular:
         optiune.clear()
         optiune.send_keys('Ciolpan')
 
-dropdown = Select(driver.find_element(By.CLASS_NAME, 'q-select__dropdown-icon q-icon fas fa-angle-down'))
-print('dropdown', dropdown)
-dropdown.select_by_value('Dna.')
-#driver.find_elements(By.XPATH, '//*[@id="app"]/div/div/main/div/div/div[2]/div[6]/div/div[2]/div/div/div[2]/div/div/label[1]/div/div[1]/div/label/div/div/div[2]/i').click()
-
-
-#Completez Pasul 2 din rezervare: Servicii suplimentare; optez pentru lipsa excursii otpionale
+#Completez Pasul 2 din rezervare: Servicii suplimentare;
 driver.find_element(By.XPATH,'//*[@id="app"]/div/div/main/div/div/div[2]/div[5]/div[2]/div/div[1]/div/div[4]/div[1]/div[1]/div/div/div').click()
+
+dropdown= driver.find_element(By.XPATH, '//*[@id="app"]/div/div/main/div/div/div[2]/div[6]/div/div[2]/div/div/div[2]/div/div/label[1]/div/div[1]/div/label/div/div/div[1]/div[1]/span')
+print('dropdown', dropdown)
+
+#dropdown = Select(driver.find_element(By.CLASS_NAME, 'q-select__focus-target'))
+#print('dropdown', dropdown)
+#driver.find_elements(By.XPATH, '//*[@id="app"]/div/div/main/div/div/div[2]/div[6]/div/div[2]/div/div/div[2]/div/div/label[1]/div/div[1]/div/label/div/div/div[2]/i').click()
 
 #Selecteaza judet
 driver.find_element(By.XPATH,'//*[@id="app"]/div/div/main/div/div/div[2]/div[7]/div/div[2]/div/div/div/label[3]/div/div[1]/div/label/div/div/div[2]/i').click()
