@@ -3,8 +3,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
-service_obj = Service("C:/Users/IT School Lenovo/PycharmProjects/pythonProject9/Drivers/chromedriver.exe")
+service_obj = Service("C:/Users/IT School Lenovo/Desktop/Chrome108/chromedriver.exe")
 
 driver = webdriver.Chrome(service=service_obj)
 
@@ -24,7 +25,7 @@ for circuite in optiuni_meniu:
         break
 
 
-#Selectez "Marele tur al Greciei"
+#Selectez un circuit;
 driver.find_element(By.XPATH, '//*[@id="ctMainMenuCircuits"]/div/div/div/div[2]/div[2]/div[3]/div/div/ul[3]/li[2]/a').click()
 
 time.sleep(4)
@@ -39,27 +40,42 @@ driver.find_element(By.XPATH, '//*[@id="app"]/div/div/main/div[2]/div/div[2]/div
 #Completez datele pentru rezervare:
 # Email:
 time.sleep(10)
-# optiuni_formular = driver.find_elements(By.CLASS_NAME, 'q-field q-validation-component row no-wrap items-start bg-white text-secondary q-px-md col-xs-12 q-input q-field--borderless q-field--labeled')
-# print('optiuni_formular', len(optiuni_formular))
 optiuni_formular = driver.find_elements(By.CSS_SELECTOR, 'input[tabindex= "0"]')
 print('optiuni_formular', len(optiuni_formular))
 
 for optiune in optiuni_formular:
 
+    # Completez Pasul1 din rezervare: Titularul contractului
     if optiune.get_attribute('aria-label') == 'Email':
         optiune.click()
         optiune.send_keys('tomiirina@yahoo.com')
     if optiune.get_attribute('aria-label') == 'Telefon':
         print('telefon')
         optiune.click()
+        optiune.clear()
         optiune.send_keys('0775277377')
+    if optiune.get_attribute('aria-label') == 'Prenume':
+        print('Prenume')
+        optiune.click()
+        if optiune.text == '':
+           optiune.send_keys('Oana')
+    if optiune.get_attribute('aria-label') == 'Nume':
+        print('Nume')
+        optiune.click()
+        optiune.clear()
+        optiune.send_keys('Ciolpan')
+
+dropdown = Select(driver.find_element(By.CLASS_NAME, 'q-select__dropdown-icon q-icon fas fa-angle-down'))
+print('dropdown', dropdown)
+dropdown.select_by_value('Dna.')
+#driver.find_elements(By.XPATH, '//*[@id="app"]/div/div/main/div/div/div[2]/div[6]/div/div[2]/div/div/div[2]/div/div/label[1]/div/div[1]/div/label/div/div/div[2]/i').click()
 
 
+#Completez Pasul 2 din rezervare: Servicii suplimentare; optez pentru lipsa excursii otpionale
+driver.find_element(By.XPATH,'//*[@id="app"]/div/div/main/div/div/div[2]/div[5]/div[2]/div/div[1]/div/div[4]/div[1]/div[1]/div/div/div').click()
 
-
-
-
-
+#Selecteaza judet
+driver.find_element(By.XPATH,'//*[@id="app"]/div/div/main/div/div/div[2]/div[7]/div/div[2]/div/div/div/label[3]/div/div[1]/div/label/div/div/div[2]/i').click()
 
 
 
